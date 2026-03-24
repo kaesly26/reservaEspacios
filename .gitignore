@@ -1,0 +1,12 @@
+# Ignorar carpetas de compilación
+build/
+dist/
+nbproject/private/
+
+# Ignorar archivos de configuración local
+nbproject/genfiles.properties
+nbproject/project.properties
+
+# Ignorar logs y archivos temporales
+*.log
+*.tmp
