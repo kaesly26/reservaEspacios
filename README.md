@@ -6,7 +6,7 @@ Proyecto de aula para la administración y reserva de espacios académicos.
 * **Base de Datos:** [Nombre]
 * **Modelo:** [Nombre]
 * **Vista:** [Nombre]
-* **Controlador:** [Nombre]
+* **Controlador:** [Valeria Degiovanni]
 
 ## Tecnologías
 * **Lenguaje:** Java 8
