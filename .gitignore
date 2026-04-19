@@ -1,0 +1,10 @@
+# Ignorar carpetas de compilación
+build/
+nbbuild/
+dist/
+nbdist/
+
+# Ignorar logs y archivos temporales
+*.log
+*.tmp
+*.bak
