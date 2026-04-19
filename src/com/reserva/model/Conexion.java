@@ -5,25 +5,24 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Katy Lorena
- */
 public class Conexion {
     
     private final String base = "reserva_aulas_cerete"; 
-    private final String user = "root";
-    private final String password = "nuevaconexion";
-    private final String url = "jdbc:mysql://localhost:3306/" + base;
+    private final String user = "katy";
+    private final String password = "987456123";
+    private final String url = "jdbc:mysql://localhost:3306/" + base + "?useSSL=false&serverTimezone=UTC&transformedBitIsBoolean=false";
     private Connection con = null;
 
     public Connection getConexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(url, user, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("Error de conexión: " + e);
-            JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos");
+            con = DriverManager.getConnection(this.url, this.user, this.password);
+            System.out.println("Conexión exitosa");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Error: No se encontró el Driver JDBC: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Error de SQL: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos: " + e.getMessage());
         }
         return con;
     }
