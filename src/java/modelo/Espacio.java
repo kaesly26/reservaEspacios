@@ -1,4 +1,4 @@
-package uml;
+package modelo;
 
 public class Espacio {
 

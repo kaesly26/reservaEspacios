@@ -1,22 +1,12 @@
-package uml;
+package modelo;
 
 public class Usuario {
 
     private Long id;
     private String nombre;
     private String correo;
-    private RolUsuario rol;
+    private String rol;
 
-    public Usuario() {
-
-    }
-
-    public Usuario(Long id, String nombre, String correo, RolUsuario rol) {
-        this.id = id;
-        this.nombre = nombre;
-        this.correo = correo;
-        this.rol = rol;
-    }
 
     public Long getId() {
         return id;
@@ -42,11 +32,11 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public RolUsuario getRol() {
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(RolUsuario rol) {
+    public void setRol(String rol) {
         this.rol = rol;
     }
 

@@ -2,7 +2,7 @@
 build/
 nbdeploy/
 dist/
-
+nbproject/private
 
 # Ignorar logs y archivos temporales
 *.log

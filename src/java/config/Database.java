@@ -1,4 +1,4 @@
-package modelado;
+package config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,10 +6,10 @@ import java.sql.SQLException;
 
 public class Database {
 
-    private String driver;
-    private String url;
-    private String usuario;
-    private String contraseña;
+    private final String driver;
+    private final String url;
+    private final String usuario;
+    private final String contraseña;
 
     public Database() {
         this.driver = "com.mysql.jdbc.Driver";

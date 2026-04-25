@@ -1,4 +1,4 @@
-package uml;
+package modelo;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -11,12 +11,12 @@ public class Reservacion {
     private Date fecha;
     private Time horaInicio;
     private Time horaFin;
-    private EstadoReservacion estado;
+    private String estado;
 
     public Reservacion() {
     }
 
-    public Reservacion(Long id, Long usuarioId, Long espacioId, Date fecha, Time horaInicio, Time horaFin, EstadoReservacion estado) {
+    public Reservacion(Long id, Long usuarioId, Long espacioId, Date fecha, Time horaInicio, Time horaFin, String estado) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.espacioId = espacioId;
@@ -74,12 +74,13 @@ public class Reservacion {
         this.horaFin = horaFin;
     }
 
-    public EstadoReservacion getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoReservacion estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
+    
 }
