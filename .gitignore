@@ -1,8 +1,8 @@
 # Ignorar carpetas de compilación
 build/
-nbbuild/
+nbdeploy/
 dist/
-nbdist/
+
 
 # Ignorar logs y archivos temporales
 *.log
