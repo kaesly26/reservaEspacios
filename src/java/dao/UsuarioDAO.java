@@ -27,6 +27,7 @@ public class UsuarioDAO {
                 obj.setId(rs.getLong("id"));
                 obj.setNombre(rs.getString("nombre"));
                 obj.setCorreo(rs.getString("correo"));
+                obj.setPassword(rs.getString("password"));
                 obj.setRol(rs.getString("rol"));
                 lista.add(obj);
 
@@ -51,18 +52,56 @@ public class UsuarioDAO {
 
         return lista;
     }
+    
+    public Usuario login(String correo, String clave) {
+        Usuario obj = null;
+        String sql = "SELECT * FROM usuario WHERE correo = ? AND password = ?";
+        
+        try{
+            cn = db.conectar();
+            ps = cn.prepareStatement(sql);
+            ps.setString(1, correo);
+            ps.setString(2, clave);
+            rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                obj = new Usuario();
+                obj.setId(rs.getLong("id"));
+                obj.setNombre(rs.getString("nombre"));
+                obj.setCorreo(rs.getString("correo"));
+                obj.setPassword(rs.getString("password"));
+                obj.setRol(rs.getString("rol"));
+            }
+            
+        } catch (Exception ex) {
+            System.err.println("Error en identificación: " + ex.getMessage());
+        } finally {
+             try {
+                if (cn != null) {
+                    cn.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception ex) {
+
+            }
+        }
+        return obj;
+    }
 
     public int registrar(Usuario obj) {
         int result = 0;
 
         try {
             cn = db.conectar();
-            String sql = "INSERT INTO usuario(nombre, correo, rol) "
-                    + "VALUES (?,?,?)";
+            String sql = "INSERT INTO usuario(nombre, correo, password, rol) "
+                    + "VALUES (?,?,?,?)";
             ps = cn.prepareStatement(sql);
             ps.setString(1, obj.getNombre());
             ps.setString(2, obj.getCorreo());
-            ps.setString(3, obj.getRol());
+            ps.setString(3, obj.getPassword());
+            ps.setString(4, obj.getRol());
 
             result = ps.executeUpdate();
         } catch (Exception ex) {
@@ -87,13 +126,14 @@ public class UsuarioDAO {
 
         try {
             cn = db.conectar();
-            String sql = "UPDATE usuario SET nombre=?, correo=?, rol=?"
+            String sql = "UPDATE usuario SET nombre=?, correo=?, password=?, rol=?"
                     + "WHERE id=?";
             ps = cn.prepareStatement(sql);
             ps.setString(1, obj.getNombre());
             ps.setString(2, obj.getCorreo());
-            ps.setString(3, obj.getRol());
-            ps.setLong(4, obj.getId());
+            ps.setString(3, obj.getPassword());
+            ps.setString(4, obj.getRol());
+            ps.setLong(5, obj.getId());
 
             result = ps.executeUpdate();
         } catch (Exception ex) {
@@ -153,6 +193,7 @@ public class UsuarioDAO {
                 obj.setId(rs.getLong("id"));
                 obj.setNombre(rs.getString("nombre"));
                 obj.setCorreo(rs.getString("correo"));
+                obj.setPassword(rs.getString("password"));
                 obj.setRol(rs.getString("rol"));
 
             }

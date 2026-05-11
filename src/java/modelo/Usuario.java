@@ -5,6 +5,7 @@ public class Usuario {
     private Long id;
     private String nombre;
     private String correo;
+    private String password;
     private String rol;
 
 
@@ -30,6 +31,14 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+    
+    public String getPassword() {
+        return password; 
+    }
+    
+    public void setPassword(String password) {
+        this.password = password; 
     }
 
     public String getRol() {

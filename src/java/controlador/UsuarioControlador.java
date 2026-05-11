@@ -17,6 +17,12 @@ public class UsuarioControlador extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("usuarioLogueado") == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
         response.setContentType("text/html;charset=UTF-8");
 
         String accion = request.getParameter("accion");
@@ -80,9 +86,10 @@ public class UsuarioControlador extends HttpServlet {
         } else {
             obj.setId(Long.parseLong(idStr));
         }
-        
+
         obj.setNombre(request.getParameter("nombre"));
         obj.setCorreo(request.getParameter("correo"));
+        obj.setPassword(request.getParameter("password"));
         obj.setRol(request.getParameter("rol"));
 
         int result;

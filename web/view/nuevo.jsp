@@ -25,6 +25,10 @@
                             <input value="${usuario.correo}" name="correo" type="text" maxlength="50" class="form-control" required="">
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">Password:</label>
+                            <input value="${usuario.password}" name="password" type="text" maxlength="50" class="form-control" required="">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Rol:</label>
                             <select name="rol" class="form-select" required="">
                                 <option value="" ${usuario.rol == null ? 'selected' : ''} disabled>Seleccione un rol...</option>

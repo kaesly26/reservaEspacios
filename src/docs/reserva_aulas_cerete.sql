@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT '',
   `correo` varchar(225) COLLATE utf8mb3_spanish_ci DEFAULT '',
+  `password` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT '',
   `rol` enum('Admin','User') COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;

@@ -12,6 +12,9 @@
         <div class="container mt-3">
             <div class="card">
                 <div class="card-body">
+                    <a href="LoginControlador?accion=salir" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </a>
                     <h3>Gestión de Usuarios</h3>
                     <hr />
 
@@ -26,6 +29,7 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Correo</th>
+                                <th>Pass</th>
                                 <th>Rol</th>
                                 <th>Acción</th>
                             </tr>
@@ -36,6 +40,7 @@
                                     <td>${item.id}</td>
                                     <td>${item.nombre}</td>
                                     <td>${item.correo}</td>
+                                    <td>${item.password}</td>
                                     <td>${item.rol}</td>
                                     <td>
                                         <a href="UsuarioControlador?accion=editar&id=${item.id}" class="btn btn-info btn-sm">
