@@ -21,6 +21,10 @@
                     <a href="UsuarioControlador?accion=nuevo" class="btn btn-success btn-sm">
                         <i class="fa fa-plus-circle"></i> Nuevo
                     </a>
+
+                    <a href="${pageContext.request.contextPath}/ReservacionControlador?accion=listar" class="btn btn-info btn-sm">
+                        <i class="fa fa-calendar-alt"></i> Gestionar Reservas
+                    </a>
                     <jsp:include page="../components/Mensajes.jsp"/>
 
                     <table class="table table-bordered table-striped mt-2">

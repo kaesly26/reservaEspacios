@@ -8,7 +8,7 @@
     </head>
     <body>
         <%
-            response.sendRedirect("UsuarioControlador?accion=listar");
+            response.sendRedirect("login.jsp");
             %>
     </body>
 </html>

@@ -5,30 +5,32 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import modelo.Usuario;
+import modelo.Reservacion;
 
-public class UsuarioDAO {
+public class ReservacionDAO {
 
     private Connection cn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
     Database db = new Database();
 
-    public ArrayList<Usuario> ListarTodos() {
-        ArrayList<Usuario> lista = new ArrayList<Usuario>();
+    public ArrayList<Reservacion> ListarTodos() {
+        ArrayList<Reservacion> lista = new ArrayList<Reservacion>();
         try {
             cn = db.conectar();
-            String sql = "SELECT * FROM usuario";
+            String sql = "SELECT * FROM reservacion";
             ps = cn.prepareStatement(sql);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Usuario obj = new Usuario();
+                Reservacion obj = new Reservacion();
                 obj.setId(rs.getLong("id"));
-                obj.setNombre(rs.getString("nombre"));
-                obj.setCorreo(rs.getString("correo"));
-                obj.setPassword(rs.getString("password"));
-                obj.setRol(rs.getString("rol"));
+                obj.setUsuarioId(rs.getLong("usuario_id"));
+                obj.setEspacioId(rs.getLong("espacio_id"));
+                obj.setFecha(rs.getDate("fecha"));
+                obj.setHoraInicio(rs.getTime("hora_inicio"));
+                obj.setHoraFin(rs.getTime("hora_fin"));
+                obj.setEstado(rs.getString("estado"));
                 lista.add(obj);
 
             }
@@ -52,56 +54,22 @@ public class UsuarioDAO {
 
         return lista;
     }
-    
-    public Usuario login(String correo, String clave) {
-        Usuario obj = null;
-        String sql = "SELECT * FROM usuario WHERE correo = ? AND password = ?";
-        
-        try{
-            cn = db.conectar();
-            ps = cn.prepareStatement(sql);
-            ps.setString(1, correo);
-            ps.setString(2, clave);
-            rs = ps.executeQuery();
-            
-            if (rs.next()) {
-                obj = new Usuario();
-                obj.setId(rs.getLong("id"));
-                obj.setNombre(rs.getString("nombre"));
-                obj.setCorreo(rs.getString("correo"));
-                obj.setPassword(rs.getString("password"));
-                obj.setRol(rs.getString("rol"));
-            }
-            
-        } catch (Exception ex) {
-            System.err.println("Error en identificación: " + ex.getMessage());
-        } finally {
-             try {
-                if (cn != null) {
-                    cn.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-            } catch (Exception ex) {
 
-            }
-        }
-        return obj;
-    }
-
-    public int registrar(Usuario obj) {
+    public int registrar(Reservacion obj) {
         int result = 0;
 
         try {
             cn = db.conectar();
-            String sql = "INSERT INTO usuario(nombre, correo, password, rol) "
-                    + "VALUES (?,?,?,?)";
+
+            String sql = "INSERT INTO reservacion(usuario_id, espacio_id, fecha, hora_inicio, hora_fin, estado) "
+                    + "VALUES (?,?,?,?,?,?)";
             ps = cn.prepareStatement(sql);
-            ps.setString(1, obj.getNombre());
-            ps.setString(2, obj.getCorreo());
-            ps.setString(3, obj.getPassword());
-            ps.setString(4, obj.getRol());
+            ps.setLong(1, obj.getUsuarioId());
+            ps.setLong(2, obj.getEspacioId());
+            ps.setDate(3, obj.getFecha());
+            ps.setTime(4, obj.getHoraInicio());
+            ps.setTime(5, obj.getHoraFin());
+            ps.setString(6, obj.getEstado());
 
             result = ps.executeUpdate();
         } catch (Exception ex) {
@@ -121,19 +89,22 @@ public class UsuarioDAO {
         return result;
     }
 
-    public int editar(Usuario obj) {
+    public int editar(Reservacion obj) {
         int result = 0;
 
         try {
             cn = db.conectar();
-            String sql = "UPDATE usuario SET nombre=?, correo=?, password=?, rol=? "
+
+            String sql = "UPDATE reservacion SET usuario_id=?, espacio_id=?, fecha=?, hora_inicio=?, hora_fin=?, estado=? "
                     + "WHERE id=?";
             ps = cn.prepareStatement(sql);
-            ps.setString(1, obj.getNombre());
-            ps.setString(2, obj.getCorreo());
-            ps.setString(3, obj.getPassword());
-            ps.setString(4, obj.getRol());
-            ps.setLong(5, obj.getId());
+            ps.setLong(1, obj.getUsuarioId());
+            ps.setLong(2, obj.getEspacioId());
+            ps.setDate(3, obj.getFecha());
+            ps.setTime(4, obj.getHoraInicio());
+            ps.setTime(5, obj.getHoraFin());
+            ps.setString(6, obj.getEstado());
+            ps.setLong(7, obj.getId());
 
             result = ps.executeUpdate();
         } catch (Exception ex) {
@@ -158,7 +129,7 @@ public class UsuarioDAO {
 
         try {
             cn = db.conectar();
-            String sql = "DELETE FROM usuario WHERE id = ?";
+            String sql = "DELETE FROM reservacion WHERE id = ?";
             ps = cn.prepareStatement(sql);
             ps.setLong(1, id);
             result = ps.executeUpdate();
@@ -179,22 +150,24 @@ public class UsuarioDAO {
         return result;
     }
 
-    public Usuario buscaPorId(Long id) {
-        Usuario obj = null;
+    public Reservacion buscaPorId(Long id) {
+        Reservacion obj = null;
         try {
             cn = db.conectar();
-            String sql = "SELECT * FROM usuario where id = ?";
+            String sql = "SELECT * FROM reservacion where id = ?";
             ps = cn.prepareStatement(sql);
             ps.setLong(1, id);
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                obj = new Usuario();
+                obj = new Reservacion();
                 obj.setId(rs.getLong("id"));
-                obj.setNombre(rs.getString("nombre"));
-                obj.setCorreo(rs.getString("correo"));
-                obj.setPassword(rs.getString("password"));
-                obj.setRol(rs.getString("rol"));
+                obj.setUsuarioId(rs.getLong("usuario_id"));
+                obj.setEspacioId(rs.getLong("espacio_id"));
+                obj.setFecha(rs.getDate("fecha"));
+                obj.setHoraInicio(rs.getTime("hora_inicio"));
+                obj.setHoraFin(rs.getTime("hora_fin"));
+                obj.setEstado(rs.getString("estado"));
 
             }
         } catch (Exception ex) {
@@ -217,5 +190,4 @@ public class UsuarioDAO {
 
         return obj;
     }
-
 }

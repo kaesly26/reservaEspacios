@@ -14,20 +14,28 @@
         <title>Login page</title>
     </head>
     <body>
-        <form action="LoginControlador" method="post">
-            <input type="hidden" name="accion" value="ingresar">
-            <div class="mb-3">
-                <label>Correo:</label>
-                <input type="email" name="txtCorreo" class="form-control" required>
+        <div class="container mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Reservación de Espacios</h2>
+                    <h3>Login</h3>
+                    <form action="LoginControlador" method="post">
+                        <input type="hidden" name="accion" value="ingresar">
+                        <div class="mb-3">
+                            <label>Correo:</label>
+                            <input type="email" name="txtCorreo" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Contraseña:</label>
+                            <input type="password" name="txtPass" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                        <c:if test="${not empty error}">
+                            <p class="text-danger mt-2">${error}</p>
+                        </c:if>
+                    </form>
+                </div>
             </div>
-            <div class="mb-3">
-                <label>Contraseña:</label>
-                <input type="password" name="txtPass" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-            <c:if test="${not empty error}">
-                <p class="text-danger mt-2">${error}</p>
-            </c:if>
-        </form>
+        </div>        
     </body>
 </html>
